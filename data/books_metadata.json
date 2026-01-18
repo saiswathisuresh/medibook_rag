@@ -1,0 +1,11 @@
+{
+  "chapter_books": [
+    "2008-ESMO-Handbook-Cancer-Prevention",
+    "Bethesda Clinical Hematology"
+  ],
+  "non_chapter_books": [
+    "breast",
+    "bone", 
+    "bladder-1"
+  ]
+}

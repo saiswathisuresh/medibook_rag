@@ -52,7 +52,7 @@ def ask_grok(prompt):
         "Content-Type": "application/json"
     }
     payload = {
-        "model": GROK_MODEL,
+        "model": "grok-3",
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": 3000
     }

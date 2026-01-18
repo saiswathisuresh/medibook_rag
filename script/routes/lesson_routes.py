@@ -26,14 +26,24 @@ def ask_grok(prompt):
         "Content-Type": "application/json"
     }
     payload = {
-        "model": GROK_MODEL,
+        "model": "grok-3",
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": 3000
     }
-    r = requests.post(GROK_URL, headers=headers, json=payload)
-    if r.status_code != 200:
+    
+    try:
+        r = requests.post(GROK_URL, headers=headers, json=payload, timeout=60)
+        print(f"Status: {r.status_code}")
+        print(f"Response: {r.text[:500]}")  # First 500 chars
+        
+        if r.status_code != 200:
+            print(f"Error: {r.text}")
+            return None
+            
+        return r.json()["choices"][0]["message"]["content"]
+    except Exception as e:
+        print(f"Exception: {str(e)}")
         return None
-    return r.json()["choices"][0]["message"]["content"]
 
 @router.post("/generate-lesson-plan", response_model=LessonResponse)
 async def generate_lesson(req: LessonRequest):
